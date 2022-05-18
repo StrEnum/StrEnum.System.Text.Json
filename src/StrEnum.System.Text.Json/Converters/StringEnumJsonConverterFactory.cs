@@ -6,6 +6,13 @@ namespace StrEnum.System.Text.Json.Converters;
 
 internal class StringEnumJsonConverterFactory : JsonConverterFactory
 {
+    private readonly NoMemberFoundBehavior _noMemberFoundBehavior;
+
+    public StringEnumJsonConverterFactory(NoMemberFoundBehavior noMemberFoundBehavior)
+    {
+        _noMemberFoundBehavior = noMemberFoundBehavior;
+    }
+
     private readonly ConcurrentDictionary<Type, JsonConverter> _converters = new();
 
     public override bool CanConvert(Type typeToConvert)
@@ -27,7 +34,7 @@ internal class StringEnumJsonConverterFactory : JsonConverterFactory
     {
         var converterType = typeof(StringEnumJsonConverter<>).MakeGenericType(stringEnum);
 
-        var converter = Activator.CreateInstance(converterType) as JsonConverter;
+        var converter = Activator.CreateInstance(converterType,  _noMemberFoundBehavior) as JsonConverter;
 
         return converter!;
     }

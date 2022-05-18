@@ -9,6 +9,12 @@ namespace StrEnum.System.Text.Json.Converters;
 /// <typeparam name="TStringEnum"></typeparam>
 public class StringEnumJsonConverter<TStringEnum>: JsonConverter<TStringEnum> where TStringEnum: StringEnum<TStringEnum>, new()
 {
+    private readonly NoMemberFoundBehavior _noMemberFoundBehavior;
+
+    public StringEnumJsonConverter(NoMemberFoundBehavior noMemberFoundBehavior)
+    {
+        _noMemberFoundBehavior = noMemberFoundBehavior;
+    }
     public override TStringEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var jsonValue = reader.GetString();
@@ -17,6 +23,9 @@ public class StringEnumJsonConverter<TStringEnum>: JsonConverter<TStringEnum> wh
 
         if (parsed == null || !((string)parsed).Equals(jsonValue, StringComparison.InvariantCulture))
         {
+            if (_noMemberFoundBehavior == NoMemberFoundBehavior.ReturnNull)
+                return null!;
+
             throw new JsonException($"Requested name or value '{jsonValue}' was not found in the string enum '{typeof(TStringEnum).Name}'.");
         }
 
