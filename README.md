@@ -1,0 +1,1 @@
+# StrEnum.System.Text.Json

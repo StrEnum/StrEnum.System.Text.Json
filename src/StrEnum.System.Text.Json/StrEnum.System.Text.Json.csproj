@@ -1,6 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+		<PackageId>StrEnum.System.Text.Json</PackageId>
+		<Description>String enum support for System.Text.Json.</Description>
+		<Authors>dmitry-khmara</Authors>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageTags>StringEnum;String;Enum;JSON;System.Text.Json</PackageTags>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/StrEnum/StrEnum.System.Text.Json</RepositoryUrl>
+
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<LangVersion>10.0</LangVersion>
