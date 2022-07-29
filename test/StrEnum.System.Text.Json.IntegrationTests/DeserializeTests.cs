@@ -41,7 +41,7 @@ namespace StrEnum.System.Text.Json.IntegrationTests
             var deserialize = () => JsonSerializer.Deserialize<DeserializedObject>(json, options);
 
             deserialize.Should().Throw<JsonException>()
-                .WithMessage("Requested name or value 'TrailRunning' was not found in the string enum 'Sport'.");
+                .WithMessage("Requested value 'TrailRunning' was not found in the string enum 'Sport'.");
         }
 
         [Fact]
@@ -68,13 +68,26 @@ namespace StrEnum.System.Text.Json.IntegrationTests
             var deserialize = () => JsonSerializer.Deserialize<DeserializedObject>(json, options);
 
             deserialize.Should().Throw<JsonException>()
-                .WithMessage("Requested name or value 'Quidditch' was not found in the string enum 'Sport'.");
+                .WithMessage("Requested value 'Quidditch' was not found in the string enum 'Sport'.");
         }
 
         [Fact]
-        public void Deserialize_GivenJsonWithInvalidValue_AndReturnNullNoMemberBehavior_ShouldThrowAnException()
+        public void Deserialize_GivenJsonWithInvalidValue_AndReturnNullNoMemberBehavior_ShouldReturnNull()
         {
             var json = @"{""sport"":""Quidditch""}";
+
+            var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }
+                .UseStringEnums(NoMemberFoundBehavior.ReturnNull);
+
+            var obj = JsonSerializer.Deserialize<DeserializedObject>(json, options);
+
+            obj.Should().BeEquivalentTo(new { Sport = (Sport?)null });
+        }
+
+        [Fact]
+        public void Deserialize_GivenJsonWithValidName_AndReturnNullNoMemberBehavior_ShouldReturnNull()
+        {
+            var json = @"{""sport"":""TrailRunning""}";
 
             var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }
                 .UseStringEnums(NoMemberFoundBehavior.ReturnNull);

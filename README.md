@@ -51,13 +51,16 @@ The above produces:
 
 ### Deserialize from JSON:
 
-```csharp
-var race = JsonSerializer.Deserialize<Race>(json, options);
+```json
+{"Name":"Cape Town Cycle Tour","Sport":"ROAD_CYCLING"}
 ```
 
-`race`  is equivalent to:
+The above JSON can be deserialized into a C# object that contains a StrEnum enum:
 
 ```csharp
+var race = JsonSerializer.Deserialize<Race>(json, options);
+
+// race is equivalent to:
 new { Name = "Cape Town Cycle Tour", Sport = Sport.RoadCycling };
 ```
 
