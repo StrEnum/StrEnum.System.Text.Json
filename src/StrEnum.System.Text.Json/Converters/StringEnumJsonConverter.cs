@@ -19,17 +19,17 @@ public class StringEnumJsonConverter<TStringEnum>: JsonConverter<TStringEnum> wh
     {
         var jsonValue = reader.GetString();
 
-        StringEnum<TStringEnum>.TryParse(reader.GetString()!, out var parsed);
+        var parsed = StringEnum<TStringEnum>.TryParse(reader.GetString()!, out var member, matchBy:MatchBy.ValueOnly);
 
-        if (parsed == null || !((string)parsed).Equals(jsonValue, StringComparison.InvariantCulture))
+        if (!parsed)
         {
             if (_noMemberFoundBehavior == NoMemberFoundBehavior.ReturnNull)
                 return null!;
 
-            throw new JsonException($"Requested name or value '{jsonValue}' was not found in the string enum '{typeof(TStringEnum).Name}'.");
+            throw new JsonException($"Requested value '{jsonValue}' was not found in the string enum '{typeof(TStringEnum).Name}'.");
         }
 
-        return parsed;
+        return member!;
     }
 
     public override void Write(Utf8JsonWriter writer, TStringEnum value, JsonSerializerOptions options)
