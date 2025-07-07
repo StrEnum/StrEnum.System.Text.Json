@@ -9,7 +9,7 @@ namespace StrEnum.System.Text.Json
         /// Configure System.Text.Json to serialize and deserialize string enums.
         /// </summary>
         /// <param name="options"></param>
-        /// <param name="noMemberFoundBehavior">Specifies whether to thrown an exception or use a null value for members that cannot be parsed.</param>
+        /// <param name="noMemberFoundBehavior">Specifies whether to throw an exception or use a null value for members that cannot be parsed.</param>
         /// <returns></returns>
         public static JsonSerializerOptions UseStringEnums(this JsonSerializerOptions options, NoMemberFoundBehavior noMemberFoundBehavior = NoMemberFoundBehavior.ThrowException)
         {
