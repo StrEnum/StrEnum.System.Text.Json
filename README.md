@@ -2,7 +2,7 @@
 
 Allows for [StrEnum](https://github.com/StrEnum/StrEnum/) string enum JSON serialization and deserialization with System.Text.Json.
 
-The package targets .NET Standard 2.0 and can be used with System.Text.Json 4.6.0-7.\*.
+The package targets .NET Standard 2.0 and can be used with System.Text.Json 4.6.0-9.\*.
 
 ## Installation
 
@@ -66,6 +66,6 @@ new { Name = "Cape Town Cycle Tour", Sport = Sport.RoadCycling };
 
 ## License
 
-Copyright &copy; 2022 [Dmitry Khmara](https://dmitrykhmara.com).
+Copyright &copy; 2025 [Dmytro Khmara](https://dmytrokhmara.com).
 
 StrEnum is licensed under the [MIT license](LICENSE.txt).
