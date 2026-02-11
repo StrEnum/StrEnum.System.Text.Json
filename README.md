@@ -2,7 +2,7 @@
 
 Allows for [StrEnum](https://github.com/StrEnum/StrEnum/) string enum JSON serialization and deserialization with System.Text.Json.
 
-The package targets .NET Standard 2.0 and can be used with System.Text.Json 4.6.0-9.\*.
+The package targets .NET Standard 2.0 and can be used with System.Text.Json 4.6.0-10.\*.
 
 ## Installation
 
