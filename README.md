@@ -1,12 +1,12 @@
 # StrEnum.System.Text.Json
 
-Allows for [StrEnum](https://github.com/StrEnum/StrEnum/) string enum JSON serialization and deserialization with System.Text.Json.
+Lets you serialize and deserialize [StrEnum](https://github.com/StrEnum/StrEnum/) string enums to JSON via System.Text.Json.
 
-The package targets .NET Standard 2.0 and can be used with System.Text.Json 4.6.0-10.\*.
+Targets .NET Standard 2.0; works with System.Text.Json 4.6.0 – 10.x.
 
 ## Installation
 
-You can install [StrEnum.System.Text.Json](https://www.nuget.org/packages/StrEnum.System.Text.Json/) using the .NET CLI:
+Install [StrEnum.System.Text.Json](https://www.nuget.org/packages/StrEnum.System.Text.Json/) via the .NET CLI:
 
 ```
 dotnet add package StrEnum.System.Text.Json
@@ -14,7 +14,7 @@ dotnet add package StrEnum.System.Text.Json
 
 ## Usage
 
-Create a string enum and a class that contains it:
+### Defining a string enum and a model
 
 ```csharp
 public class Sport : StringEnum<Sport>
@@ -29,33 +29,31 @@ public class Race
 }
 ```
 
-Configure `JsonSerializerOptions` by calling the `UseStringEnums()` method and pass it to `JsonSerializer` :
+### Configuring the serializer
+
+Call `UseStringEnums()` on a `JsonSerializerOptions` instance and pass it to `JsonSerializer`:
 
 ```csharp
 var options = new JsonSerializerOptions().UseStringEnums();
 ```
 
-### Serialize to JSON:
+### Serializing to JSON
 
 ```csharp
-var ctct = new Race { Name = "Cape Town Cycle Tour", Sport = Sport.RoadCycling };
+var race = new Race { Name = "Cape Town Cycle Tour", Sport = Sport.RoadCycling };
 
-var json = JsonSerializer.Serialize(ctct, options);
+var json = JsonSerializer.Serialize(race, options);
 ```
 
-The above produces:
+Produces:
 
 ```json
 {"Name":"Cape Town Cycle Tour","Sport":"ROAD_CYCLING"}
 ```
 
-### Deserialize from JSON:
+### Deserializing from JSON
 
-```json
-{"Name":"Cape Town Cycle Tour","Sport":"ROAD_CYCLING"}
-```
-
-The above JSON can be deserialized into a C# object that contains a StrEnum enum:
+The same JSON can be deserialized back to a `Race`:
 
 ```csharp
 var race = JsonSerializer.Deserialize<Race>(json, options);
